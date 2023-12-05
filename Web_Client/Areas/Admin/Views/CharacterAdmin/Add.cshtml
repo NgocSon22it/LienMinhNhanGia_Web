@@ -1,0 +1,381 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model DataAccess.Models.Character
+
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+}
+
+<style>
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 160px;
+        height: 36px;
+    }
+
+
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 38px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #test {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+    }
+
+    .wrapper {
+        margin: auto !important;
+    }
+
+    .input-texts{
+        display:flex;
+        margin-bottom:16px;
+    }
+
+    .input-texts textarea{
+        width: 155px;
+    }
+</style>
+
+<span id="error" class="text-danger" hidden> </span>
+
+<form id="form">
+    <div class="grid">
+        <div class="pokemon-list__header">
+            <div class="pokemon-list__load-more__button size-14">
+                <span style="font-size: 26px;">
+                    Thêm nhân vật
+                </span>
+            </div>
+
+        </div>
+        <div class="pokemon-list__header">
+
+            <div class="content">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="~/assets/img/Akatsuki-Logo-Transparent-Images.png" height="420" width="327">
+
+                        <div class="product-img-item">
+                            <div class="form-create_item">
+                                <div class="form-create_input" style="width: 450px;">
+                                    <input required  class="LinkImage" style="background: none; font-size: 18.5px; margin-left: 36px;"
+                                           type="file" />
+                                    <input name="LinkImage" link="LinkImage" value="" hidden />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1 style="padding-top: 36px; padding-bottom:25px;">Thông tin nhân vật</h1>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="CharacterId">ID nhân vật </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="CharacterId" placeholder="Nhập ID" required />
+                                </div>
+
+                            </div>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Name">Tên</label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Name" placeholder="Nhập tên" required />
+                                </div>
+
+                            </div>
+                           
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Health">Máu </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Health" type="number" placeholder="Nhập chỉ số máu" required />
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Chakra">Năng lượng </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Chakra" type="number" placeholder="Nhập năng lượng" required />
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Damage">Sát thương </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Damage" type="number" placeholder="Nhập sát thương" required />
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Speed">Tốc độ </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Speed" type="number" placeholder="Nhập tốc độ" required />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        @*thông tin kỹ năng*@
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="pokemon-list__header">
+                <div class="content" style="margin-top: 20px;">
+                    <div class="wrapper skill-data">
+                        <div class="product-img">
+                            <img src="~/assets/img/Akatsuki-Logo-Transparent-Images.png" height="420" width="327">
+
+                            <div class="product-img-item">
+                                <div class="form-create_item">
+                                    <div class="form-create_input" style="width: 450px;">
+                                        <input class="LinkImage" style="background: none; font-size: 18.5px; margin-left: 36px;"
+                                               type="file" required />
+                                        <input name="Skill_LinkImage" link="LinkImage" value="" hidden  />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="product-info">
+                            <div class="product-text">
+                                <h1 style="padding: 21px 0 24px 0;">Thông tin kỹ năng</h1>
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillId_@i">ID kỹ năng</label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillId_@i" name="Skill_SkillId" placeholder="Nhập ID" required />
+                                    </div>
+                                </div>
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillName_@i">Tên kỹ năng</label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillName_@i" name="Skill_Name" placeholder="Nhập" required />
+                                    </div>
+
+                                </div>
+                                
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillChakra_@i">Năng lượng </label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillChakra_@i" type="number" name="Skill_Chakra" placeholder="Nhập năng lượng" required />
+                                    </div>
+
+                                </div>
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillDamage_@i">Sát thương </label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillDamage_@i" type="number"  name="Skill_Damage" placeholder="Nhập sát thương" required />
+                                    </div>
+
+                                </div>
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillCoin_@i">Giá bán</label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillCoin_@i" type="number" name="Skill_Coin" placeholder="Nhập giá kỹ năng " required />
+                                    </div>
+
+                                </div>
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillUpdateCoin_@i">Giá nâng cấp</label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillUpdateCoin_@i" type="number" name="Skill_UpdateCoin" placeholder="Nhập giá nâng cấp " required />
+                                    </div>
+
+                                </div>
+
+                                <div class="input-text">
+                                    <div class="input-lable">
+                                        <label for="SkillLevelUnlock_@i">Level mở khóa</label>
+                                    </div>
+                                    <div class="input-lable">
+                                        <input id="SkillLevelUnlock_@i" type="number" name="Skill_LevelUnlock" placeholder="Nhập level mở khóa" required />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div style="text-align:center;" class="form-group">
+        <input type="submit" value="Thêm mới" class="btn btn-primary" />
+        <input type="button" id="back" value="Quay lại" class="btn btn-primary" />
+    </div>
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#back").click(function () {
+            window.location.href = "@Url.Action("Index", "CharacterAdmin")"
+        });
+
+        $('.LinkImage').change(function () {
+            var input_file = $(this);
+
+            var input_link = input_file.closest('.form-create_input').find('[link="LinkImage"]');
+            var imgElement = input_file.closest('.product-img').find('img');
+
+            var file_data = input_file.get(0).files;
+            var form_data = new FormData();
+
+            if (file_data.length > 0) {
+                form_data.append("image", file_data[0]);
+            }
+
+            $.ajax({
+                url: '@Url.ActionLink("Upload","UploadImage")', // point to server-side controller method
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: form_data
+            }).done(function (result) {
+                if (result.status === "success") {
+                   
+                    //alert(result.path);
+                    var src = imgElement.attr('src').replace('/assets/img/Akatsuki-Logo-Transparent-Images.png', result.path);
+
+                    imgElement.attr("src", src);
+
+                    input_link.attr('value', src);
+                   
+                }
+                else {
+                    alert(result.message);
+                }
+            });
+        });
+
+
+
+        $("#form").submit(function (e) {
+
+            e.preventDefault();
+
+            var formData = $(this).serializeArray();
+
+            var data = {};
+            var skills = [];
+            var skill = {};
+            var CharacterId;
+
+            $(formData).each(function (index, obj) {
+                if (obj.name.includes("CharacterId")) { CharacterId = obj.value }
+
+                if (obj.name.includes("Skill_")) {
+                    if (obj.name.includes("Skill_LinkImage")) skill = {};
+
+                    var name = obj.name.replace('Skill_', '');
+                    skill[name] = obj.value;
+
+                    if (obj.name.includes("Skill_LevelUnlock")) {
+                        skill["CharacterId"] = CharacterId;
+                        skills.push(skill);
+                    }
+
+                } else {
+                    data[obj.name] = obj.value;
+                }
+            });
+
+            data['skills'] = skills;
+
+            var json = JSON.stringify(data);
+
+            var url = "@Route.addCharacter";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                data: json,
+                headers: {
+                    "Authorization": "Bearer " + "@access",
+                    "refresh": "@refresh"
+                },
+                success: function (result, status, xhr) {
+                    window.location.href = "@Url.Action("Index", "CharacterAdmin")";
+                },
+                error: function (xhr, status, error) {
+                    //alert("fail");
+                    $("#error").text(xhr.responseText).show();
+                    console.log(xhr.responseText)
+                }
+
+            });
+            
+        });
+
+    });
+
+
+</script>

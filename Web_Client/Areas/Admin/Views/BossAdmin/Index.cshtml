@@ -1,0 +1,161 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<DataAccess.Models.Boss>
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+}
+<style>
+
+    .messess {
+        background-color: white;
+        text-align: center;
+        margin: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .modal-body {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: auto;
+    }
+
+    .modal-inner {
+        margin: auto;
+        background-color: white;
+    }
+
+    .modal-footer {
+        width: 380px;
+        height: 300px;
+        background-color: white;
+        margin: auto;
+        position: relative;
+        border-radius: 8px;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        $("#keyword").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).find("td:eq(0)").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        ShowAllBoss();
+
+        function ShowAllBoss() {
+            var content = '';
+
+            $("#myTable").html("");
+
+            var url = "@Route.getAllBossAdmin";
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " + "@access",
+                    "refresh": "@refresh"
+                },
+                success: function (result) {
+                    $.each(result, function (index, v) {
+                        content += `
+                                                <tr>
+                                                    <td style="text-align: left; ">
+                                                        <img src="${v.linkImage}" class="mr-3" alt=""> ${v.name}
+                                                    </td>
+                                                    <td> ${v.health}  </td>
+                                                    <td> ${v.speed}   </td>
+                                                    <td> ${v.coinBonus} xu, ${v.experienceBonus} exp, ${v.pointSkillBonus} hp </td>
+                                                   
+                                                    <td>
+                                                            <a href="/Admin/BossAdmin/Update/${v.bossId}">
+                                                            <img src="/admin/img/edit.png" />
+                                                        </a>
+                                                        <img class="delete" bossId="${v.bossId}" src="/admin/img/delete.png" />
+                                                    </td>
+                                                </tr>
+                                                `
+                    });
+
+                    $('#myTable').html(content);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        $("table").on("click", ".delete", function () {
+
+            var bossId = $(this).attr('bossId');
+            if (confirm("Bạn có chắc chắn muốn xóa không?") == true) {
+                var url = "@Route.deleteBoss/";
+
+                $.ajax({
+                    url: url + bossId,
+                    type: "delete",
+                    headers: {
+                        "Authorization": "Bearer " + "@access",
+                        "refresh": "@refresh"
+                    },
+                    success: function (result, status, xhr) {
+                        ShowAllBoss();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr)
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="active-member">
+                        <input class="col-8" type="text" id="keyword" placeholder="Tìm kiếm theo tên ...">
+                        <a class="btn-primary btn" type="button" id="mybtn" style=" margin: 0px  0px 2px 10.8rem;"
+                           asp-area="Admin" asp-controller="BossAdmin" asp-action="Add">Thêm mới</a>
+                    </div>
+
+                    <div class="active-member">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead style="background-color: #f1f1f1;">
+                                    <tr>
+                                        <th>Tên</th>
+                                        <th>Máu</th>
+                                        <th>Tốc độ</th>
+                                        <th>Phần thưởng</th>
+                                       
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model DataAccess.Models.Monster
+
+@{
+    ViewData["Title"] = "Quái vật";
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+    <link rel="stylesheet" href="style.css">
+
+
+}
+<style>
+
+    .input-text {
+        display: flex;
+    }
+
+    .product-img {
+        margin-top: 50px;
+    }
+
+    .input-text input {
+        width: 96%;
+    }
+
+    .input-lable {
+        width: 120px;
+        height: 40px;
+    }
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 38px;
+            font-family: 'Playfair Display', serif;
+            /*color: #8d8d8d;*/
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #text {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+    }
+
+    .input-input {
+        margin-left: 30px;
+    }
+</style>
+
+<div class="container">
+    <div class="grid">
+        <div class="pokemon-list__header">
+            <div class="pokemon-list__load-more__button size-14">
+                <a asp-controller="Monster" asp-action="Index"><span>Quái vật</span></a>
+            </div>
+            <div class="content" style="margin-top: -50px;">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="@Html.DisplayFor(model => model.LinkImage)"
+                             height="420" width="327">
+
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1>@Html.DisplayFor(model => model.Name)</h1>
+
+                            <div id="text">
+                                <h2>@Html.DisplayFor(model => model.Description)</h2>
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Máu: </label>
+                                </div>
+                                <div class="input-input">
+                                    <span style="font-size: 16px;">@Model.Health</span>
+                                </div>
+                            </div>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Sát thương: </label>
+                                </div>
+                                <div class="input-input">
+                                    <span style="font-size: 16px;">@Model.Damage</span>
+                                </div>
+                            </div>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Tốc độ : </label>
+                                </div>
+                                <div class="input-input">
+                                    <span style="font-size: 16px;">@Model.Speed</span>
+                                </div>
+                            </div>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Phần thưởng </label>
+                                </div>
+                                <div class="input-input">
+                                    <span style="font-size: 16px;">@Model.CoinBonus</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

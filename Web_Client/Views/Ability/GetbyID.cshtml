@@ -1,0 +1,103 @@
+﻿@model DataAccess.Models.Ability
+
+@{
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+    <link rel="stylesheet" href="style.css">
+
+
+}
+<style>
+
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 178px;
+        height: 40px;
+    }
+
+    .product-img {
+        margin-top: 50px;
+    }
+
+    .input-lable label {
+        height: 125px;
+        margin: 0 0 0 38px;
+        font-family: 'Playfair Display', serif;
+        /*color: #8d8d8d;*/
+        line-height: 1.7em;
+        font-size: 15px;
+        font-weight: lighter;
+        overflow: hidden;
+    }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #text {
+        overflow: auto;
+        width: 300px;
+        height: 80px;
+    }
+
+    .input-input {
+        margin-left: 20px;
+    }
+
+        .input-input span {
+            font-size: 16px;
+        }
+
+        .input-input {
+            margin-left: 20px;
+        }
+
+            .input-input span {
+                font-size: 16px;
+            }
+    </style>
+}
+
+<div class="container">
+    <div class="grid">
+        <div class="pokemon-list__header">
+            <div class="pokemon-list__load-more__button size-14">
+                <a asp-controller="Ability" asp-action="Index"><span>Nội tại</span></a>
+            </div>
+            <div class="content" style="margin-top: -50px;">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="@Html.DisplayFor(model => model.LinkImage)"
+                             height="420" width="327">
+
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1>@Html.DisplayFor(model => model.Name)</h1>
+
+                            <div id="text">
+                                <h2>@Html.DisplayFor(model => model.Description)</h2>
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label for="">Mở khóa: </label>
+                                </div>
+                                <div class="input-input">
+                                    <span style="font-size: 16px;">@Model.LevelUnlock</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

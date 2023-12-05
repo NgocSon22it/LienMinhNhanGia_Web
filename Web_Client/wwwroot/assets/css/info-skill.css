@@ -1,0 +1,459 @@
+:root {
+    font-family: 'Lemonada', cursive;
+    font-size: 17px;
+
+    --h1: 35px;
+    --h2: 30px;
+    --h3: 25px;
+    --h4: 23px;
+    --h5: 20px;
+    --h6: 18px;
+    --p: 15px;
+
+    --main: #eae9e9;
+    --second: #e6a419;
+    --gray: #d4dcdd;
+    --gray-full: #000;
+}
+
+html, body {
+    background: var(--main);
+    margin: 0;
+}
+
+/* top-nav */
+/* /top-nav */
+
+/* header */
+#header {
+    background: var(--main);
+    position: fixed;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    font-size: 13px;
+}
+
+#header img {
+    width: 350px;
+    height: 30px;
+    margin-left: 62px;
+    margin-top: 7px;
+}
+
+#header #nav-bar {
+    float: right;
+    padding-right: 100px;
+}
+
+#header #nav-bar ul li {
+    display: inline;
+    margin-left: 70px;
+}
+
+#header #nav-bar ul li a {
+    text-decoration: none;
+    color: var(--gray-full);
+}
+
+#header #nav-bar ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--second);
+}
+/* / header */
+
+/* main */
+
+#main {
+    position: relative;
+    top: 64px;
+    width: 1000px;
+    background: inherit;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 20px;
+}
+
+#main .form-info h2 {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+#main .form-info #form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+#main .form-info #form #email {
+    padding: 5px;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 9px;
+    /* color: var(--gray-full); */
+    background: var(--main);
+    border: 1px solid var(--gray);
+
+}
+
+#main .form-info #form #submit {
+    padding: 5px;
+    width: 125px;
+    margin: auto;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--second);
+    border: none;
+    border-radius: 2px;
+}
+/* / form */
+
+/* product-info */
+#main #product-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+#main #product-info article {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    /* text-align: justify; */
+}
+
+#main #product-info article .font-awesome-ico {
+    width: 40px;
+    margin-right: 20px;
+}
+
+#main #product-info article .font-awesome-ico .fa-3x {
+    color: var(--second);
+}
+
+#main #product-info article .container {
+    margin-left: 60px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+}
+
+#main #product-info article .container h2 {
+    margin-bottom: -20px;
+    margin-top: -8px;
+    font-size: 17px;
+    /* text-align: justify; */
+}
+
+#main #product-info article .container p {
+    font-size: 14px;
+    line-height: 1.3;
+    text-align: justify;
+}
+
+/* /product-info */
+
+/* video container */
+#main #video-container {
+    display: flex;
+    justify-content: center;
+    /* background: red; */
+}
+/* /video container */
+
+/* product-prices */
+#main #prices {
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding-left: 15px;
+}
+
+  #main #prices .price-info {
+    width: 100%;
+    margin: 5px
+  }
+
+#main #prices h2, h3 {
+    font-size: 14px;
+}
+
+#main #prices h2 {
+    background-color: rgba(45, 45, 45, .2);
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 12px;
+/*     width: 290px; */
+    margin-top: 0px;
+    height: 20px;
+}
+
+#main #prices p {
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+#main #prices button {
+    padding: 8px;
+    background: var(--second);
+    border: none;
+    border-radius: 2px;
+    width: 90px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#main #prices button:hover {
+    background: rgb(177, 116, 3);
+}
+
+#main #prices .price-info {
+    border: 1px solid #000;
+    border-top: #fff;
+    padding-bottom: 10px;
+    border-radius: 3px;
+}
+/* / brand prices */
+
+/* / main */
+
+/* footer */
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    top: 80px;
+    left: 19px;
+    width: 970px;
+    margin: auto;
+    background: rgba(45, 45, 45, .1);
+    padding-left: 20px;
+    padding-right: 10px;
+    height: 50px;
+    padding-bottom: 0px;
+    /* padding-top: 50px; */
+}
+
+#footer ul {
+    /* margin-bottom: 0px; */
+    position: absolute;
+    top: -12px;
+    right: 25px;
+    
+}
+
+#footer ul li {
+    display: inline;
+    /* float: right; */
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#footer ul li a {
+    text-decoration: none;
+    color: rgba(45, 45, 45, 1);
+}
+
+#footer ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--second);
+}
+
+#footer #copyright {
+    color: rgba(45, 45, 45, 1);
+    font-size: 13px;
+    /* margin-right: -250px; */
+    position: absolute;
+    right: 20px;
+    margin-bottom: 0px;
+}
+/* footer */
+
+/* responsiveness */
+
+/* media width 375px max*/
+@media (max-width: 480px) {
+    /* html, body */
+     :root {
+        font-family: cursive;
+    }
+    
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    /* top-nav */
+    /* / top-nav */
+
+    /* header */
+    #header {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        diplay: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 15px;
+    }
+
+    #header img {
+        width: 90%;
+        margin: auto
+    }
+
+    #header #nav-bar {
+        text-align: center;
+        width: 100%;
+    }
+
+    #header #nav-bar ul {
+        margin:auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 90px
+    }
+  
+  #header #nav-bar ul li {
+    margin-left: -15%
+  }
+    /* / header */
+    
+    /* main */
+    #main {
+        width: 100%;
+        margin-top: 33px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    /* /main */
+
+    /* form info */
+    #main .form-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-item: center;
+    }
+    #main .form-info h2 {
+        font-size: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #main .form-info #email {
+        width: 90%;
+      margin: auto;
+    }
+    /* / form-info */
+
+    /* product-info */
+    #main #product-info {
+        width: 100%;
+    }
+
+    #main #product-info article {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    #main #product-info article .fa-3x {
+        display: none;
+    }
+
+    #main #product-info article .container {
+        width: 100%;
+        padding: 5px 0 0 0;
+        margin-left: -60px;
+        line-height: 2;
+    }
+
+    #main #product-info article .container h2 {
+        font-size: 15px;
+        text-align: center;
+    }
+    #main #product-info article .container p {
+        text-align: center;
+        font-size: 13px;
+    }
+    /* /product-info */
+
+    /* product video */
+    #main #video-container {
+      width: 90%;
+    }
+    #main #video-container #video {
+      width: 100%;
+      height: 250px;
+    }
+    /* / product-video */
+
+    /* product-prices */
+    #main #prices {
+        width: 88%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+/*         background: yellow */
+    }
+
+    #main #prices .price-info {
+        margin-bottom: 10px;
+        border-top: 1px solid;
+    }
+  
+  #main #prices .price-info .product-name {
+        width: 100%;
+        background: yellow;
+  }
+  
+  #main #prices .price-info .product-name h2 {
+/*     width: 10px; */
+      padding: 15px;
+  }
+
+    #main #prices .price-info button {
+        font-size: 12px;
+        padding: 4px;
+    }
+    /* / product-prices */
+
+    /* footer */
+    #footer {
+        width: 100%;
+      position: relative;
+    }
+  
+  #footer ul {
+    width: 50%;
+    position: absolute;
+    right: 25%;
+    padding-left: -30px;
+  }
+    
+  #footer #copyright {
+    position: absolute;
+    right: 32%;
+  }
+    /* /footer */
+}
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.home-product__pagination {
+    margin: 34px 0 32px 0;
+    border: 2px solid #a2c7e7;
+    border-radius: 26px;
+    height: 50px;
+}
+.pagination-item {
+    margin: 0 6px;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.pagination-item__link {
+    display: block;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #939393;
+    min-width: 40px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 2px;
+}
+.fas, .fa-solid {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+.fa, .fas, .fa-solid, .far, .fa-regular, .fal, .fa-light, .fat, .fa-thin, .fad, .fa-duotone, .fab, .fa-brands {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display, inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
+.pagination-item-active .pagination-item__link {
+    background-color: #6572cd;
+    color: white;
+}
+.pagination-item__link {
+    display: block;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    min-width: 40px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 2px;
+}

@@ -1,0 +1,216 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+    <link href="~/admin/css/style.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="~/admin/js/common.min.js"></script>
+    <script src="~/admin/js/custom.min.js"></script>
+}
+<style>
+
+    .messess {
+        background-color: white;
+        text-align: center;
+        margin: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .modal-body {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: auto;
+    }
+
+    .modal-inner {
+        margin: auto;
+        background-color: white;
+    }
+
+    .modal-footer {
+        width: 380px;
+        height: 300px;
+        background-color: white;
+        margin: auto;
+        position: relative;
+        border-radius: 8px;
+    }
+
+    .nav-global__item > a span {
+    color: #00d2ff;
+    }
+
+    .nav-global__list {
+    margin-top:10px;
+    }
+
+    .search_button button {
+     width: 40px;
+     height: 40px;
+    }
+
+    .search_button .sum {
+     width: 60px;
+    }
+
+    .header__search{
+        margin-top: 6px;
+    }
+    .info-charac{
+        margin-top: 74px;
+    }
+    .info-charac_items a{
+        color: #00d2ff;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        ShowAllItem();
+
+        function ShowAllItem() {
+            var content = '';
+
+            $("#myTable-item").html("");
+
+            var url = "@Route.GetItembyAccount";
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " + "@access",
+                    "refresh": "@refresh"
+                },
+                success: function (result) {
+                    $.each(result, function (index, v) {
+                        content += `
+                                    <tr>
+                                        <td style="text-align: left; ">
+                                            <img src="${v.linkImage}" class="mr-3" alt=""> ${v.name}
+                                        </td>
+                                        <td> ${v.amount}  </td>
+                                        <td> ${v.description}  </td>
+                                    </tr>
+                                    `
+                    });
+
+                    $('#myTable-item').html(content);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        ShowAllAbility();
+
+        function ShowAllAbility() {
+            var content = '';
+
+            $("#myTable-ability").html("");
+
+            var url = "@Route.GetAbilitybyAccount";
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " + "@access",
+                    "refresh": "@refresh"
+                },
+                success: function (result) {
+                    $.each(result, function (index, v) {
+                        content += `
+                                    <tr>
+                                        <td style="text-align: left; ">
+                                            <img src="${v.linkImage}" class="mr-3" alt=""> ${v.name}
+                                        </td>
+                                        <td> ${v.description}  </td>
+
+                                    </tr>
+                                    `
+                    });
+
+                    $('#myTable-ability').html(content);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        
+    });
+
+</script>
+
+
+<div class="container">
+    <div class="grid">
+<div>
+    <h1>Vật phẩm</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="active-member">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead style="background-color: #f1f1f1;">
+                                    <tr>
+                                        <th>Tên</th>
+                                        <th>Số lượng</th>
+                                        <th>Mô tả</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable-item">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Nội tại</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="active-member">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead style="background-color: #f1f1f1;">
+                                    <tr>
+                                        <th>Tên</th>
+                                        <th>Mô tả</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable-ability">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+

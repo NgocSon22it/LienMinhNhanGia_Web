@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DTOs.ItemDTOs.ViewItem>
+
+@{
+    ViewData["Title"] = "Vật phẩm";
+    <link rel="stylesheet" href="~/assets/css/character.css">
+
+}
+<script>
+    $(document).ready(function () {
+        $("#search").submit(function (e) {
+            e.preventDefault();
+            search();
+        });
+
+        $("#btn-search").click(function () {
+            search();
+        });
+    });
+
+    function search() {
+        var value = $("#keyword-search").val().toLowerCase();
+        window.location.href = `/Item?keyword=${value}`;
+    }
+</script>
+<div class="container">
+    <div class="grid">
+        <div class="grid__row">
+            <div class="pokemon-list__header">
+                <div style="margin-top: 10px; margin-bottom: -10px;" class="banner_naruto">
+                    <img class="banner_naruto-img" src="~/assets/img/banner naruto.png" alt="">
+                </div>
+                <div class="pokemon-list__load-more__button size-14"><span>Vật phẩm</span></div>
+
+                @{
+                    if (Model == null)
+                    {
+                        var message = (string)ViewData["message"];
+                        <h3 style="text-align: center"> @message </h3>
+
+                    }
+                    else
+                    {
+                        var totalPages = (int)ViewData["TotalPages"];
+                        var currentPage = (int)ViewData["CurrentPage"];
+                        var pageSize = (int)ViewData["PageSize"];
+                        var keyword = (string)ViewData["keyword"];
+                        <div class="content">
+                            <ul class="product-list">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="product-list-1">
+                                        <div class="avata">
+                                            <div class="avata__img">
+                                                <img src="@item.LinkImage" alt="" class="imgs">
+                                            </div>
+                                            <div class="title">
+                                                <a asp-action="GetbyID" asp-route-Id="@item.ItemId" class="btn">@item.Name </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            <div style="display: flex; justify-content: center">
+
+                                <ul class="pagination home-product__pagination">
+                                    @if (currentPage > 1)
+                                    {
+                                        <li class="pagination-item">
+                                            <a href="@Url.Action("Index", "Item", new {keyword, page = currentPage - 1, pageSize })" class="pagination-item__link">
+                                                <i class="pagination-item__icon fas fa-angle-left">
+                                                </i>
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @for (var i = (currentPage - 2 > 0 ? currentPage - 2 : 1); i <= currentPage; i++)
+                                    {
+                                        <li class="@((i == currentPage) ? "pagination-item pagination-item-active" : "pagination-item")">
+                                            <a href="@Url.Action("Index", "Item", new {keyword, page = i, pageSize })" class="pagination-item__link">@i</a>
+                                        </li>
+                                    }
+
+                                    @if (currentPage < totalPages)
+                                    {
+                                        @for (var i = currentPage + 1; i < (currentPage + 2 > totalPages ? currentPage + 2 : totalPages); i++)
+                                        {
+                                            <li class="pagination-item">
+                                                <a href="@Url.Action("Index", "Item", new {keyword, page = i, pageSize })" class="pagination-item__link">@i</a>
+                                            </li>
+                                        }
+
+                                        <li class="pagination-item">
+                                            <a href="@Url.Action("Index", "Item", new {keyword, page = currentPage + 1, pageSize })" class="pagination-item__link">
+                                                <i class="pagination-item__icon fas fa-angle-right"> </i>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,226 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model DataAccess.Models.Item
+
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+}
+
+<style>
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 160px;
+        height: 36px;
+    }
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 38px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #test {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+    }
+
+    .wrapper {
+        margin: auto !important;
+    }
+
+    .input-texts {
+        display: flex;
+        margin-bottom: 16px;
+    }
+
+        .input-texts textarea {
+            width: 155px;
+        }
+
+    .product-text h1 {
+        padding-bottom: 42px;
+        padding-top: 58px;
+    }
+</style>
+
+<span id="error" class="text-danger" hidden> </span>
+
+<form id="form">
+    <div class="grid">
+        <div class="pokemon-list__header">
+            <div class="pokemon-list__load-more__button size-14">
+                <span style="font-size: 26px;">
+                    Thêm vật phẩm
+                </span>
+            </div>
+
+        </div>
+        <div class="pokemon-list__header">
+
+            <div class="content">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="~/assets//img//Akatsuki-Logo-Transparent-Images.png" height="420" width="327">
+                        <div class="product-img-item">
+                            <div class="form-create_item">
+                                <div class="form-create_input" style="width: 450px;">
+                                    <input required class="LinkImage" style="background: none; font-size: 18.5px; margin-left: 36px;"
+                                           type="file" />
+                                    <input name="LinkImage" link="LinkImage" hidden />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1 style="padding-top: 36px;font-size:32px;">Thông tin vật phẩm</h1>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="ItemId">ID vật phẩm </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="ItemId" placeholder="Nhập ID vật phẩm" required />
+                                </div>
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Name">Tên vật phẩm </label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Name" placeholder="Nhập tên vật phẩm" required />
+                                </div>
+                            </div>
+
+                            <div class="input-texts">
+                                <div class="input-lable">
+                                    <label asp-for="Description">Mô tả </label>
+                                </div>
+                                <div class="input-lable">
+                                    <textarea asp-for="Description" required></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label asp-for="Coin">Giá bán</label>
+                                </div>
+                                <div class="input-lable">
+                                    <input asp-for="Coin" type="number" placeholder="Nhập giá bán" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;" class="form-group">
+        <input type="submit" value="Thêm mới" class="btn btn-primary" />
+        <input type="button" id="back" value="Quay lại" class="btn btn-primary" />
+    </div>
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#back").click(function () {
+            window.location.href = "@Url.Action("Index", "ItemAdmin")"
+        });
+
+        $('.LinkImage').change(function () {
+            var input_file = $(this);
+
+            var input_link = input_file.closest('.form-create_input').find('[link="LinkImage"]');
+            var imgElement = input_file.closest('.product-img').find('img');
+
+            var file_data = input_file.get(0).files;
+            var form_data = new FormData();
+
+            if (file_data.length > 0) {
+                form_data.append("image", file_data[0]);
+            }
+
+            $.ajax({
+                url: '@Url.ActionLink("Upload","UploadImage")', // point to server-side controller method
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: form_data
+            }).done(function (result) {
+                if (result.status === "success") {
+
+                    imgElement.attr("src", result.path);
+
+                    input_link.attr('value', result.path);
+
+                }
+                else {
+                    alert(result.message);
+                }
+            });
+        });
+
+        $("#form").submit(function (e) {
+
+            e.preventDefault();
+
+            var formData = $(this).serializeArray();
+
+            var data = {};
+
+            $(formData).each(function (index, obj) {
+                data[obj.name] = obj.value;
+            });
+
+            var json = JSON.stringify(data);
+
+            var url = "@Route.addItem";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                data: json,
+                headers: {
+                    "Authorization": "Bearer " + "@access",
+                    "refresh": "@refresh"
+                },
+                success: function (result, status, xhr) {
+                    window.location.href = "@Url.Action("Index", "ItemAdmin")";
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    $("#error").text(xhr.responseText).show();
+                    console.log(xhr.responseText)
+                }
+            });
+        });
+    });
+</script>

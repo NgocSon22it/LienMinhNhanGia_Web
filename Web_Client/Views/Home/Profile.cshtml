@@ -1,0 +1,278 @@
+﻿@using Obj_Common;
+@model DTOs.AccountDTOs.AccountProfile
+@{
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+}
+
+<style>
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 160px;
+        height: 40px;
+    }
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 20px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 17px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input {
+        display: flex;
+    }
+
+    .input-icon {
+        margin-left: 20px;
+    }
+
+    .input-input i {
+        font-size: 1rem;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .input-input {
+        align-items: center;
+    }
+
+    .input-gmail p {
+        margin-left: 2px;
+        font-size: 17px;
+    }
+
+    .input-input input {
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .info-input {
+        margin-top: -30px;
+    }
+
+    .product-price-btn {
+        width: 0px;
+        height: 0px;
+    }
+
+    .product-img {
+        margin-top: 50px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#changeProfile").click(function () {
+            var pName = $("#Name");
+            var inputName = "<input style='height: 20px; margin-top: 3px;' id='Name'  name='Name' value='@Model.Name'/><br /><span id = 'name-error' style = 'display: none; color: red;' > Họ và tên không được để trống.</span>"
+            pName.replaceWith(inputName);
+
+            $("#title").text("Thay đổi thông tin");
+
+            $(".input-text").each(function (index) {
+                if (index != 0) {
+                    $(this).hide();
+                }
+            });
+
+            $("#changeProfile").hide();
+            $("#changeAvatar").show();
+            $("#saveProfile").show();
+        });
+
+        $('#input-file').change(function () {
+            var input_file = $(this);
+
+            var input_link = $('#input-link');
+            var imgElement = $('#avatar');
+
+
+            var file_data = input_file.get(0).files;
+            var form_data = new FormData();
+
+            if (file_data.length > 0) {
+                form_data.append("image", file_data[0]);
+            }
+
+            $.ajax({
+                url: '@Url.ActionLink("Upload","UploadImagePlayer")', // point to server-side controller method
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: form_data
+            }).done(function (result) {
+                if (result.status === "success") {
+
+                    imgElement.attr("src", result.path);
+
+                    input_link.attr('value', result.path);
+
+                }
+                else {
+                    alert(result.message);
+                }
+            });
+        });
+
+       
+
+
+        $("#saveProfile").click(function (e) {
+            
+            var check = validation();
+
+            if(check){
+                var data = {
+                    "avatar": $('#avatar').attr('src'),
+                    "name": $('#Name').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UpdateProfile", "Home")',
+                    data: data,
+                    success: function (data) {
+                        // Show success message
+                        alert('Profile updated successfully!');
+
+                        // Reload the page
+                        location.reload();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Failed to update profile.");
+                        console.log(errorThrown);
+                    }
+                });
+            }
+
+        });
+
+
+
+        function validation(){
+            var check = false;
+            if ($("#Name").val() == "") {
+                $("#name-error").show();
+                check = false;
+            } else {
+                $("#name-error").hide();
+                check = true;
+            };
+            return check;
+        }
+    });
+</script>
+
+
+<div class="container">
+    <div class="grid">
+        <div class="grid__row">
+            <div class="container">
+                <div class="grid">
+                    <div style="z-index: 0;" class="pokemon-list__header">
+
+                        <div class="content">
+                            <form id="formUpdate">
+                                <div class="wrapper">
+                                    <div class="product-img">
+                                        <img id="avatar" src="@Model.Avatar" height="420" width="327">
+                                        <div id="changeAvatar" style="display: none">
+                                            <input id="input-file" class="LinkImage" style="background: none; font-size: 18.5px; margin-left: 36px;"
+                                                   type="file" />
+                                            <input id="input-link" value="@Model.Avatar" name="LinkImage" link="LinkImage" hidden />
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-text">
+                                            <h1 id="title" style=" font-size:30px ;margin-bottom: 30px">Thông tin tài khoản</h1>
+
+                                            <div class="info-input">
+                                                <div class="input-text">
+                                                    <div class="input-lable">
+                                                        <label for="">Họ và tên: </label>
+                                                    </div>
+                                                    <div class="input-input">
+                                                        <div class="input-gmail">
+                                                            <p id="Name" style="height: 30px;margin-top: 3px;">@Model.Name</p>
+                                                           
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="input-text">
+                                                    <div class="input-lable">
+                                                        <label for="">Tên đăng nhập: </label>
+                                                    </div>
+                                                    <div class="input-input">
+                                                        <div class="input-gmail">
+                                                            <p id="Username" style="height: 30px;margin-top: 3px;">@Model.Username</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-text">
+                                                    <div class="input-lable">
+                                                        <label for="">Số xu: </label>
+                                                    </div>
+                                                    <div class="input-input">
+                                                        <div class="input-gmail">
+                                                            <p id="Coin" style="height: 20px;margin-top: 3px;">@Model.Coin</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="input-text">
+                                                    <div class="input-lable">
+                                                        <label for="">Kinh nghiệm: </label>
+                                                    </div>
+                                                    <div class="input-input">
+                                                        <div class="input-gmail">
+                                                            <p id="Experience" style="height: 20px;margin-top: 3px;">@Model.Experience</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="input-text">
+                                                    <div class="input-lable">
+                                                        <label for="">Level: </label>
+                                                    </div>
+                                                    <div class="input-input">
+                                                        <div class="input-gmail">
+                                                            <p id="Level" style="height: 20px;margin-top: 3px;">@Model.Level</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 50px;" class="product-price-btn">
+
+                                            <button id="changeProfile" type="button">Thay đổi</button>
+                                            <button id="saveProfile" type="button" style="display: none">Lưu</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

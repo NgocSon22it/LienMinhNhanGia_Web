@@ -1,0 +1,12 @@
+.title span{
+    padding-right: 4px;
+    padding-left: 4px;
+    border: 2px solid #152da8;
+    border-radius: 8px;
+    color: white;
+    line-height: 60px;
+    background-color: rgb(102, 99, 227);
+}
+.title a{
+    text-align: center;
+}

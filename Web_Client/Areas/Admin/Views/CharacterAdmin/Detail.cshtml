@@ -1,0 +1,259 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model DTOs.CharacterDTOs.ViewCharacterInfo
+
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+    var i = 0;
+}
+
+<style>
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 130px;
+        height: 36px;
+    }
+    
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 38px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #test {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+    }
+
+    .wrapper {
+        margin: auto !important;
+    }
+</style>
+
+
+<div class="grid">
+    <div class="pokemon-list__header">
+        <div class="pokemon-list__load-more__button size-14">
+            <span style="font-size: 26px;">
+                Thông tin nhân vật
+            </span>
+        </div>
+
+    </div>
+    <div class="pokemon-list__header">
+
+        <div class="content">
+            <div class="wrapper">
+                <div class="product-img">
+                    <img src="@Model.LinkImage" height="420" width="327">
+                </div>
+                <div class="product-info">
+                    <div class="product-text">
+                        <h1 style="padding: 21px 0 24px 0;">Thông tin nhân vật</h1>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label >ID nhân vật </label>
+                            </div>
+                            <div class="input-lable">
+                                <p >@Model.CharacterId</p>
+                            </div>
+
+                        </div>
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label >Tên nhân vật </label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Name</p>
+                            </div>
+
+                        </div>
+                       
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label >Máu </label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Health</p>
+                            </div>
+
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Năng lượng </label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Chakra</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Sát thương </label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Damage</p>
+                            </div>
+
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Tốc độ </label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Speed</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    @*thông tin kỹ năng*@
+    @foreach (var skil in Model.Skills)
+    {
+        <div class="pokemon-list__header">
+            <div class="content" style="margin-top: 20px;">
+                <div class="wrapper skill-data">
+                    <div class="product-img">
+                        <img src="@skil.LinkImage" height="420" width="327">
+
+                       
+
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <h1 style="padding: 21px 0 24px 0;">Thông tin kỹ năng</h1>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label >ID kỹ năng</label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.SkillId</p>
+                                   
+                                </div>
+                            </div>
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label>Tên kỹ năng</label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.Name</p>
+                                </div>
+
+                            </div>
+                           
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label>Năng lượng </label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.Chakra</p>
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label>Sát thương </label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.Damage</p>
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label>Giá bán</label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.Coin</p>
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label >Giá nâng cấp</label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.UpdateCoin</p>
+                                </div>
+
+                            </div>
+
+                            <div class="input-text">
+                                <div class="input-lable">
+                                    <label >Level mở khóa</label>
+                                </div>
+                                <div class="input-lable">
+                                    <p>@skil.LevelUnlock</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+  
+
+<div style="display:flex; justify-content:center;">
+    <div class="form-group">
+        <input type="button" value="Cập nhập" id="update" class="btn btn-primary" />
+    </div>
+    <div class="form-group">
+        <input type="button" value="Quay lại" id="back" class="btn btn-primary" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#back").click(function () {
+            window.location.href = "@Url.Action("Index", "CharacterAdmin")"
+        });
+
+        $("#update").click(function () {
+            window.location.href = "@Url.Action("Update", "CharacterAdmin", new {id = @Model.CharacterId} )"
+        });
+    });
+</script>

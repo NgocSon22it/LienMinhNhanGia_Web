@@ -1,0 +1,185 @@
+﻿@using Obj_Common;
+@model DTOs.AccountDTOs.AccountProfile
+@{
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+}
+<style>
+    .input-text {
+        display: flex;
+        margin-left: 6rem;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        text-align: left;
+        width: 15rem;
+        height: 40px;
+    }
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 20px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input {
+        display: flex;
+    }
+
+    .input-icon {
+        margin-left: 20px;
+    }
+
+    .input-input i {
+        font-size: 1rem;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .input-input {
+        align-items: center;
+    }
+
+    .input-gmail p {
+        margin-left: 2px;
+    }
+
+    .input-input input {
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+</style>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Pass").focusout(function () {
+            if ($(this).val() == "") {
+                $("#password-error").show();
+            } else {
+                $("#password-error").hide();
+            }
+        });
+
+        $("#ConfirmPass").focusout(function () {
+            if ($(this).val() == "") {
+                $("#confirmPass-error").show();
+            } else {
+                $("#confirmPass-error").hide();
+            }
+        });
+
+        $("#changPass").click(function (e) {
+            var check = validation();
+
+            if(check) {
+                var data = {
+                    "password": $("#Pass").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UpdateProfile", "Home")',
+                    data: data,
+                    success: function (data) {
+                        // Show success message
+                        alert('Password updated successfully!');
+
+                        window.location.href = "@Url.Action("Profile", "Home")"
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Failed to update password. Error: " + errorThrown);
+                    }
+                });
+            }
+
+           
+        });
+    });
+
+
+    function validation(){
+        var password = $('#Pass').val()
+        var confirmPass = $('#ConfirmPass').val()
+
+        if (password == "" || confirmPass == "") {
+            if (confirmPass == "") $("#confirmPass-error").show();
+            if (password == "") $("#password-error").show();
+            return false;
+        }
+       
+      
+        if (password != "" && confirmPass != "" && password != confirmPass) {
+            $("#confirmPass-error").hide();
+            $("#password-error").hide();
+            $('#error').show();
+            return false;
+        }
+
+        return true;
+
+    }
+</script>
+
+
+<div class="container">
+    <div class="grid">
+        <div class="grid__row">
+            <div class="container">
+                <div class="grid">
+                    <div style="z-index: 0;" class="pokemon-list__header">
+                        <div class="content">
+                            <div class="wrapper">
+                                <div class="product-text" style="width: auto !important; text-align: center">
+                                    <h1 id="title" style="margin-bottom: 20px; margin-left: 0px">Thay đổi mật khẩu</h1>
+                                    <div class="info-input">
+                                        <div class="input-text">
+                                            <div class="input-lable">
+                                                <label for="">Mật khẩu: </label>
+                                            </div>
+                                            <div class="input-input">
+                                                <div class="input-gmail">
+                                                    <input id="Pass" type="password" style="height: 20px;margin-top: 3px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <span id="password-error" style="color: red; font-size: 1rem; display: none;">Mật khẩu không được để trống.</span>
+                                        
+                                        <div class="input-text">
+                                            <div class="input-lable">
+                                                <label for="">Nhập lại mật khẩu: </label>
+                                            </div>
+                                            <div class="input-input">
+                                                <div class="input-gmail">
+                                                    <input id="ConfirmPass" type="password" style="height: 20px;margin-top: 3px;" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <span id="confirmPass-error" style="color: red; font-size: 1rem; display: none;">Nhập lại mật khẩu không được để trống.</span>
+                                        <span id="error" style="color: red; font-size: 1rem; display: none;">Nhập lại mật khẩu không trùng khớp</span>
+                                    </div>
+                                </div>
+
+                                <div class="product-price-btn">
+                                    <button id="changPass" style="margin-left: 14.5rem !important; " type="button">Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

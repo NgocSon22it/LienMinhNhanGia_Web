@@ -1,0 +1,364 @@
+﻿@using Obj_Common;
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+<script>
+    $(document).ready(function () {
+        getCharacter(null);
+        getMonster(null);
+        getBoss(null);
+        getAbility(null);
+        getItem(null);
+
+        $("#search").submit(function (e) {
+            e.preventDefault();
+            search();
+        });
+
+        $("#btn-search").click(function () {
+            search();
+        });
+
+    });
+
+    function search() {
+        var value = $("#keyword-search").val().toLowerCase();
+
+        getCharacter(value);
+        getMonster(value);
+        getBoss(value);
+        getAbility(value);
+        getItem(value);
+    }
+
+    function getCharacter(keyword) {
+        var content = '';
+        var url = '@Route.getAllCharacter';
+        var key = ''
+
+        if (keyword == null) url = url + "?total=5"
+        else {
+            url += "?total=5&keyword=" + keyword;
+            key = '?keyword=' + keyword
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                if (data != undefined && data.length > 0) {
+                    $.each(data, function (index, v) {
+                        content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                        <a href='/Character/GetbyID/${v.characterId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                    });
+                    content += `<div style="display: flex; justify-content: center">
+                                    <div class="xemthembtb" data-v-514bccfc="">
+                                        <a style="color: #fff; "
+                                                href="/Character${key}"
+                                            class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                                        <span class="age-limit" data-v-514bccfc=""></span>
+                                    </div>
+                                </div>`
+                }else {
+                    content +=`<h3 style="text-align: center" > Không tìm thấy dữ liệu</h3>`
+                }
+
+                $('#list_character').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function getMonster(keyword) {
+        var content = '';
+        var url = '@Route.getAllMonster';
+        var key = ''
+
+        if (keyword == null) url = url + "?total=5"
+        else {
+            url += "?total=5&keyword=" + keyword;
+            key = '?keyword=' + keyword
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                if (data != undefined && data.length > 0) {
+                    //for each data to create frontend a monster
+                    $.each(data, function (index, v) {
+                        content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                        <a href='/Monster/GetbyID/${v.monsterId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                    });
+                    content += `<div style="display: flex; justify-content: center">
+                                    <div class="xemthembtb" data-v-514bccfc="">
+                                        <a style="color: #fff; "
+                                                            href="/Monster${key}"
+                                            class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                                        <span class="age-limit" data-v-514bccfc=""></span>
+                                    </div>
+                                </div>`
+                } else {
+                    content += `<h3 style="text-align: center" > Không tìm thấy dữ liệu</h3>`
+                }
+
+                $('#list_monter').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                ///
+            }
+        });
+    }
+
+    function getBoss(keyword) {
+        var content = '';
+        var url = '@Route.getAllBoss';
+        var key = ''
+
+        if (keyword == null) url = url + "?total=5"
+        else {
+            url += "?total=5&keyword=" + keyword;
+            key = '?keyword=' + keyword
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                if (data != undefined && data.length > 0) {
+                    $.each(data, function (index, v) {
+                        content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                        <a href='/Boss/GetbyID/${v.bossId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                    });
+                    content += `<div style="display: flex; justify-content: center">
+                                                <div class="xemthembtb" data-v-514bccfc="">
+                                                    <a style="color: #fff; "
+                                                                   href="/Boss${key}"
+                                                       class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                                                    <span class="age-limit" data-v-514bccfc=""></span>
+                                                </div>
+                                            </div>`
+                } else {
+                    content += `<h3 style="text-align: center" > Không tìm thấy dữ liệu</h3>`
+                }
+
+                $('#list_boss').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function getAbility(keyword) {
+        var content = '';
+        var url = '@Route.getAllAbility';
+        var key = ''
+
+        if (keyword == null) url = url + "?total=5"
+        else {
+            url += "?total=5&keyword=" + keyword;
+            key = '?keyword=' + keyword
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                if (data != undefined && data.length > 0) {
+                    $.each(data, function (index, v) {
+                        content += `
+                                        <li class="product-list-1">
+                                            <div class="avata">
+                                                <div class="avata__img">
+                                                    <img src="${v.linkImage}" alt="" class="imgs">
+                                                </div>
+                                                <div class="title">
+                                                    <a href='/Ability/GetbyID/${v.abilityId}' class="btn">${v.name} </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    `
+                    });
+
+                    content += `<div style="display: flex; justify-content: center">
+                                    <div class="xemthembtb" data-v-514bccfc="">
+                                        <a style="color: #fff; "
+                                                    href="/Ability${key}"
+                                            class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                                        <span class="age-limit" data-v-514bccfc=""></span>
+                                    </div>
+                                </div>`
+                } else {
+                    content += `<h3 style="text-align: center" > Không tìm thấy dữ liệu</h3>`
+                }
+
+                $('#list_ability').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function getItem(keyword) {
+        var content = '';
+        var url = '@Route.getAllItem';
+        var key = ''
+
+        if (keyword == null) url = url + "?total=5"
+        else {
+            url += "?total=5&keyword=" + keyword;
+            key = '?keyword=' + keyword
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                if (data != undefined && data.length > 0) {
+                    $.each(data, function (index, v) {
+                        content += `
+                                            <li class="product-list-1">
+                                                <div class="avata">
+                                                    <div class="avata__img">
+                                                        <img src="${v.linkImage}" alt="" class="imgs">
+                                                    </div>
+                                                    <div class="title">
+                                                            <a href='/Item/GetbyID/${v.itemId}' class="btn">${v.name} </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        `
+                    });
+                    content += `<div style="display: flex; justify-content: center">
+                                        <div class="xemthembtb" data-v-514bccfc="">
+                                            <a style="color: #fff; "
+                                                   href="/Item${key}"
+                                               class="playForFree" data-v-514bccfc="">Xem thêm</a>
+
+                                            <span class="age-limit" data-v-514bccfc=""></span>
+                                        </div>
+                                    </div>`
+                }else {
+                    content += `<h3 style="text-align: center" > Không tìm thấy dữ liệu</h3>`
+                }
+
+                $('#list_item').html(content);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+</script>
+
+<div class="container">
+    <div class="grid">
+        <div id="slider">
+        </div>
+        <div class="grid__row">
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Nhân vật</span></div>
+                <div class="banner_naruto">
+                    <img class="banner_naruto-img" src="~/assets/img/banner naruto.png" alt="">
+                </div>
+
+                <div class="content">
+                    <ul class="product-list" id="list_character">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Quái vật</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_monter">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Boss</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_boss">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Nội tại</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_ability">
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="pokemon-list__header">
+                <div class="pokemon-list__load-more__button size-14"><span>Vật phẩm</span></div>
+                <div class="banner_nagato">
+                    <img class="banner_naruto-img" src="/assets/img/nagato banner.png" alt="">
+                </div>
+                <div class="content">
+                    <ul class="product-list" id="list_item">
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

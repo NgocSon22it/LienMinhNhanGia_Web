@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Obj_Common;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model DTOs.AccountDTOs.ViewAccountInfo
+
+@{
+    HttpContext httpContext = HttpContextAccessor.HttpContext;
+    string access = httpContext.Request.Cookies["access"];
+    string refresh = httpContext.Request.Cookies["refresh"];
+
+    <link rel="stylesheet" href="~/assets/css/info-items.css">
+}
+
+<style>
+    .input-text {
+        display: flex;
+    }
+
+        .input-text input {
+            width: 96%;
+        }
+
+    .input-lable {
+        width: 140px;
+        height: 36px;
+    }
+
+        .input-lable label {
+            height: 125px;
+            margin: 0 0 0 38px;
+            font-family: 'Playfair Display', serif;
+            color: #8d8d8d;
+            line-height: 1.7em;
+            font-size: 15px;
+            font-weight: lighter;
+            overflow: hidden;
+        }
+
+    .input-input input {
+        border: 0px;
+        font-size: 1rem;
+    }
+
+    #test {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+    }
+
+    .wrapper {
+        margin: auto !important;
+    }
+</style>
+
+
+<div class="grid">
+    <div class="pokemon-list__header">
+        <div class="pokemon-list__load-more__button size-14">
+            <span style="font-size: 26px;">
+                Thông tin tài khoản
+            </span>
+        </div>
+
+    </div>
+    <div class="pokemon-list__header">
+
+        <div class="content">
+            <div class="wrapper">
+                <div class="product-img">
+                    <img src="@Model.Avatar" height="420" width="327">
+                </div>
+                <div class="product-info">
+                    <div class="product-text">
+                        <h1 style="padding: 21px 0 24px 0;">Thông tin tài khoản</h1>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Tên tài khoản</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Name</p>
+                            </div>
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Tên đăng nhập</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Username</p>
+                            </div>
+                        </div>
+   
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Số xu</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Coin</p>
+                            </div>
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Kinh nghiệm</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Experience</p>
+                            </div>
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Level</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.Level</p>
+                            </div>
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Vị trí</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.CheckPoint</p>
+                            </div>
+                        </div>
+
+                        <div class="input-text">
+                            <div class="input-lable">
+                                <label>Điểm bonus</label>
+                            </div>
+                            <div class="input-lable">
+                                <p>@Model.PointSkill</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div style="text-align:center;">
+    <a class="btn-primary btn" type="button" asp-area="Admin" asp-controller="AccountAdmin" asp-action="Index">Quay lại</a>
+</div>                    

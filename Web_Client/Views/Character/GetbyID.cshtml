@@ -1,0 +1,184 @@
+﻿@model DTOs.CharacterDTOs.ViewCharacterInfo
+
+@{
+    <link rel="stylesheet" href="~/assets/css/infor-character.css">
+}
+<style>
+    body {
+        background-color: #314378;
+    }
+
+    a {
+        color: #03a9f4;
+    }
+
+</style>
+<div style="padding-bottom: 30px;" class="container">
+    <div class="grid">
+        <div class="grid__row">
+            <div class="pokemon-list__header">
+                <div style="    width: 150%;margin-left: -170px;"
+                     class="pokemon-list__load-more__button size-14">
+                    <span style="font-size: 26px;">
+                        Thông tin  nhân vật
+                    </span>
+                </div>
+
+                <div class="content">
+                    <div class="grid12-4 box" style=" text-align:center;height: 420px;">
+                        <div style="margin-top:50px;">
+                            <div class="info-avata">
+                                <img src="@Model.LinkImage" alt="">
+                            </div>
+
+                            <div style="    width: 170px; margin-top: 1px; margin-left: 24px;" class="title">
+                                <img src="~/assets/img/logo_web.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="grid12-4 box" style=" text-align:center; color: #152da8; height: 420px;">
+                        <img class="avarta-info"
+                             src="@Model.LinkImage"
+                             alt="HP"><br><br>
+                        <div class="info">
+                            <div class="info-item">
+                                <span>Tên</span>
+                            </div>
+                            <div class="info-item-body">
+                                <span> @Model.Name</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="info-item">
+                                <span>Máu</span>
+                            </div>
+                            <div class="info-item-body">
+                                <span> @Model.Health</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="info-item">
+                                <span>Năng lượng</span>
+                            </div>
+                            <div class="info-item-body">
+                                <span> @Model.Chakra</span>
+                            </div>
+                        </div>
+                        <div style="height: 140px;" class="avarta-infos">
+                            <div class="info">
+                                <div class="info-item">
+                                    <span>Sát thương</span>
+                                </div>
+                                <div class="info-item-body">
+                                    <span> @Model.Damage</span>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="info-item">
+                                    <span>Tốc độ</span>
+                                </div>
+                                <div class="info-item-body">
+                                    <span> @Model.Speed</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="grid12-4 box" style=" text-align:center; color: #152da8;   height: 420px;">
+                        <img class="avarta-info"
+                             src="https://tse2.mm.bing.net/th?id=OIP.l4dpnCXYV6q1GVChVTltnQHaHa&pid=Api&P=0"
+                             alt="HP"><br><br>
+
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <div class="skill">
+                                <div class="skill-item">
+                                    <div class="skill-text">
+                                        <span>@skill.Name</span>
+                                    </div>
+                                    <div class="skill-img">
+                                        <img src="@skill.LinkImage"
+                                             alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="pokemon-list__header">
+                <div style="width: 120%;margin-left: -78px;" class="pokemon-list__load-more__button size-14">
+                    <span style="font-size: 26px;">
+                        Thông tin kỹ năng
+                    </span>
+                </div>
+
+                <div class="content" style="margin-left: 36px;">
+                    @foreach (var skill in Model.Skills)
+                    {
+
+                        <div class="grid12-4 box" style=" text-align:center; color: #152da8; height: 420px;">
+                            <img class="avarta-info"
+                                 src="@skill.LinkImage"
+                                 alt="HP"><br><br>
+                            <div class="info">
+                                <div class="info-item">
+                                    <span>Tên</span>
+                                </div>
+                                <div class="info-item-body">
+                                    <span> @skill.Name</span>
+                                </div>
+                            </div>
+
+                            <div class="info">
+                                <div class="info-item">
+                                    <span>Năng lượng</span>
+                                </div>
+                                <div class="info-item-body">
+                                    <span> @skill.Chakra</span>
+                                </div>
+                            </div>
+
+                            <div class="info">
+                                <div class="info-item">
+                                    <span>Sát thương</span>
+                                </div>
+                                <div class="info-item-body">
+                                    <span> @skill.Damage</span>
+                                </div>
+                            </div>
+
+                            <div style="height: 140px;" class="avarta-infos">
+                                <div class="info">
+                                    <div class="info-item">
+                                        <span>Số xu</span>
+                                    </div>
+                                    <div class="info-item-body">
+                                        <span> @skill.Coin</span>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="info-item">
+                                        <span>Level mở khóa</span>
+                                    </div>
+                                    <div class="info-item-body">
+                                        <span> @skill.LevelUnlock</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

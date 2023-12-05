@@ -1,0 +1,133 @@
+#footer[data-v-514bccfc] {
+    padding: 10px 0 50px;
+    color: #fff;
+    background: #030c53;
+}
+
+#app .container {
+    width: 12.2rem;
+    height: 100%;
+    margin: auto;
+}
+#footer .bottom[data-v-514bccfc] {
+    width: 1000px;
+    font: 12px Microsoft JhengHei,arial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px auto 0;
+}
+html[data-region=vn] #footer .bottom .logos[data-v-514bccfc] {
+    width: 100%;
+    height: 65px;
+    background: url(https://cdn.vn.garenanow.com/web/lol-product/LOLwebsite/img/footer/logos-vn.png) no-repeat;
+    background-position: center 0;
+}
+#footer .bottom .logos {
+    width: 212px;
+    height: 100px;
+    display: flex;
+    margin: 0 auto 20px;
+    background-position: center 0;
+}
+#footer .bottom .logos img{
+   width: 100%;
+}
+#footer .bottom[data-v-514bccfc] {
+    width: 1000px;
+    font: 12px Microsoft JhengHei,arial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px auto 0;
+}
+
+
+#footer .bottom .cnt .copyrights[data-v-514bccfc] {
+    color: #fff;
+    line-height: 1.4;
+    text-align: center;
+    padding: 0 5px;
+}
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+}
+*, :after, :before {
+    box-sizing: inherit;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+#footer .bottom .cnt[data-v-514bccfc] {
+    flex: 1;
+    text-align: left;
+}
+#footer .bottom[data-v-514bccfc] {
+    width: 1000px;
+    font: 12px Microsoft JhengHei,arial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px auto 0;
+}
+#footer .bottom .cnt .social-links[data-v-514bccfc] {
+    margin-top: 30px;
+    text-align: center;
+}
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+}
+#footer .bottom .cnt .social-links .links[data-v-514bccfc] {
+    padding: 6px 0;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+}
+#footer .bottom .cnt .social-links .links .link[data-v-514bccfc] {
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    position: relative;
+    box-sizing: border-box;
+    font-family: footericon;
+    cursor: pointer;
+}
+
+#footer .bottom .cnt .social-links .links .link .link-txt[data-v-514bccfc] {
+    font-size: 10px;
+}
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+}
+html[data-region=vn] #footer .bottom .cnt .vn-playForFree[data-v-514bccfc] {
+    margin-top: 30px;
+    text-align: center;
+}
+ #footer .bottom .cnt .vn-playForFree .playForFree[data-v-514bccfc] {
+    color: #fff;
+    width: 180px;
+    height: 50px;
+    line-height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 30px;
+    display: inline-block;
+    background: url(/assets/img/khung.png) no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+.vn-playForFree{
+   text-align: center;
+   padding-top: 20px;
+}

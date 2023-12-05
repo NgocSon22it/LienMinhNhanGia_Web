@@ -1,0 +1,187 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var Avatar = HttpContextAccessor.HttpContext.Request.Cookies["Avatar"];
+    var Name = HttpContextAccessor.HttpContext.Request.Cookies["Name"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Học Viện Ninja</title>
+    <link rel="stylesheet" href="~/assets/css/header.css">
+    <link rel="stylesheet" href="~/assets/css/body.css">
+    <link rel="stylesheet" href="~/assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/assets/font/fontawesome-free-6.2.0/css/all.min.css" crossorigin="anonymous">
+    <link href="~/admin/css/style.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="~/admin/js/common.min.js"></script>
+    <script src="~/admin/js/custom.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="~/js/jquery_cookie.js"></script>
+</head>
+
+<body>
+    <header role="banner" class="global-header">
+        <div class="grid">
+            <div class="global-header__body">
+                <div class="global-header__title">
+                    <h1 class="global-header__site-name">
+                        <a asp-controller="HomeAdmin" asp-action="Index" asp-area="Admin">
+                            <img src="~/assets/img/logo_web.png"
+                                 alt="Hoc vien ninja" width="130">
+                        </a>
+                    </h1>
+                </div>
+                <nav role="navigation" class="nav-global">
+                    <div class="nav-global__body">
+                        <ul style="margin-top: 10px; margin-left:76px;" class="nav-global__list">
+                            
+                             <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="AccountAdmin" asp-action="Index"
+                                   class="nav-global__item--anime"><span>Tài khoản</span></a>
+                            </li>
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="CharacterAdmin" asp-action="Index" 
+                                   class="nav-global__item--anime"><span>Nhân vật</span></a>
+                            </li>
+
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="MonsterAdmin" asp-action="Index"
+                                   class="nav-global__item--anime"><span>Quái vật</span></a>
+                            </li>
+
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="BossAdmin" asp-action="Index"
+                                   class="nav-global__item--anime"><span>Boss</span></a>
+                            </li>
+
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="AbilityAdmin" asp-action="Index"
+                                   class="nav-global__item--anime"><span>Nội tại</span></a>
+                            </li>
+
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="ItemAdmin" asp-action="Index"
+                                   class="nav-global__item--anime"><span>Vật phẩm</span></a>
+                            </li>   
+                            
+                            <li class="nav-global__item" style="height: 57px;">
+                                <a asp-area="Admin" asp-controller="Item" asp-action="Index"
+                                   class="nav-global__item--anime"><span></span></a>
+                            </li>
+
+                            <li class="nav-global__item" style="height: 57px;">
+
+                                <div style="margin-left: 20px;" class="avatar-img">
+                                    <div style="width: 50px; height: 50px;border: 1px solid #ccc2c2;border-radius: 50%;" class="avatar-img-items">
+                                        <img style="width: 100%;border-radius: 50%;"
+                                             src="@Avatar" alt="">
+                                    </div>
+                                </div>
+                                <div style="margin-top: 68px; z-index: 1;" class="info-charac">
+                                    @*<div class="info-charac_items">
+                                        <a asp-area="" asp-controller="Home" asp-action="Profile">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>Xem thông tin</span>
+                                        </a>
+                                    </div>
+                                    <div class="info-charac_items">
+                                        <a asp-area="" asp-controller="Home" asp-action="ChangePass">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>Đổi mật khẩu</span>
+                                        </a>
+                                    </div>*@
+
+                                    <div class="info-charac_items">
+                                        <a style="color: #00d2ff;" asp-area="" asp-controller="Home" asp-action="Index">
+                                            <i style="margin-top: 4px;" class="fa-sharp fa-solid fa-rotate-left"></i>
+                                            <span>Chuyển trang</span>
+                                        </a>
+                                    </div>
+
+                                    @*<div class="info-charac_items">
+                                        <a style="color: #00d2ff;" asp-area="" asp-controller="Home" asp-action="Index">
+                                            <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                            <span>Chuyển trang</span>
+                                        </a>
+                                    </div>*@
+
+                                    <div style="position:relative;" class="info-charac_items">
+                                        <a style="color: #00d2ff;" asp-area="" asp-controller="Home" asp-action="Logout">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                            <span style="margin-top: -4px;">Đăng xuất</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div id="footer" data-v-514bccfc="">
+        <div class="container" data-v-514bccfc="">
+            <!---->
+            <div class="bottom" data-v-514bccfc="">
+                <div class="logos" data-v-514bccfc="">
+                    <img src="~/assets/img/logo_web.png" alt="">
+                </div>
+                <div class="cnt" data-v-514bccfc="">
+                    <div class="copyrights" data-v-514bccfc="">
+                        Sản phẩm được hợp tác phát hành bởi các thành viên
+                        nhóm Akatsucana sinh viên trường đại học FPT Cần Thơ &amp; Đại học FPT chi nhánh Cần Thơ<br>
+
+                        Văn phòng đại diện: tầng 4, tòa nhà Gamma đại học FPT Cần Thơ, Cầu Rau Răm, đường Nguyễn Văn
+                        Cừ, An Bình, Ninh Kiều, Cần thơ Việt Nam.<br>
+
+                        Điện thoại: (04)982 123 324;
+                    </div>
+                    <div class="social-links" data-v-514bccfc="">
+                        <!---->
+                        <div class="links" data-v-514bccfc="">
+                            <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener"
+                               class="link" data-v-514bccfc="">
+                                <i style="padding-right: 8px;" class="fa-brands fa-facebook"></i>
+                                <div class="link-txt" data-v-514bccfc="">Facebook</div>
+                            </a>
+                            <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
+                               data-v-514bccfc="">
+                                <i style="padding-right: 8px;" class="fa-brands fa-youtube"></i>
+                                <div class="link-txt" data-v-514bccfc="">Youtube</div>
+                            </a>
+                            <a href="javascript:void(0)" target="_blank" rel="noreferrer noopener" class="link"
+                               data-v-514bccfc="">
+                                <i style="padding-right: 8px;" class="fa-solid fa-envelope"></i>
+                                <div class="link-txt" data-v-514bccfc="">Gmail</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="vn-playForFree" data-v-514bccfc="">
+                        <a href="javascript:void(0)" class="playForFree"
+                           data-v-514bccfc="">CHƠI MIỄN PHÍ</a> <span class="age-limit" data-v-514bccfc=""></span>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </div>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
